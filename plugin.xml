@@ -14,10 +14,11 @@
         <engine name="cordova" version=">=3.0.0" />
     </engines>
 
+    <js-module src="www/zeroconf.js" name="ZeroConf">
+        <clobbers target="cordova.plugins.zeroconf" />
+    </js-module>
+
     <platform name="android">
-        <js-module src="www/zeroconf.js" name="ZeroConf">
-            <clobbers target="cordova.plugins.zeroconf" />
-        </js-module>
         <config-file target="AndroidManifest.xml" parent="/manifest">
             <uses-permission android:name="android.permission.CHANGE_WIFI_MULTICAST_STATE"/>
             <uses-permission android:name="android.permission.INTERNET" />
@@ -33,9 +34,6 @@
     </platform>
 
     <platform name="ios">
-        <js-module src="www/zeroconf.js" name="ZeroConf">
-            <clobbers target="cordova.plugins.zeroconf" />
-        </js-module>
         <config-file target="config.xml" parent="/*">
             <feature name="ZeroConf">
                 <param name="ios-package" value="ZeroConf"/>
@@ -46,7 +44,13 @@
         <header-file src="src/ios/Hostname.h"/>
         <source-file src="src/ios/Hostname.m"/>
     </platform>
-    
+
+    <platform name="browser">
+        <js-module src="src/browser/zeroconf.js" name="ZeroConf">
+            <runs/>
+        </js-module>
+    </platform>
+
     <dependency id="cordova-plugin-add-swift-support"/>
 
 </plugin>
